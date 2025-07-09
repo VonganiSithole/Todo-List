@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="container">
+
+        <div class="list">
+            <h2>My To-Do List</h2>
+            <input type="text" id="taskInput" placeholder="Enter a new task" />
+            <button onclick="addTask()">Add</button>
+            <ul id="taskList"></ul>
+        </div>
+    </div>
+
+<script>
+
+function addTask() {
+    const input = document.getElementById('taskInput');
+    const taskText = input.value.trim();
+
+        if (taskText === '') {
+            alert('Please enter a task.');
+            return;
+        }
+
+        const li = document.createElement('li');
+
+        
+        const taskLeft = document.createElement('div');
+        taskLeft.className = 'task-left';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+
+        const label = document.createElement('label');
+        label.textContent = taskText;
+
+        
+        checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+            li.classList.add('completed');
+        } else {
+            li.classList.remove('completed');
+        }
+        });
+
+    taskLeft.appendChild(checkbox);
+    taskLeft.appendChild(label);
+
+    
+    const delBtn = document.createElement('button');
+    delBtn.textContent = 'Delete';
+    delBtn.className = 'delete-btn';
+    delBtn.onclick = () => li.remove();
+
+    li.appendChild(taskLeft);
+    li.appendChild(delBtn);
+
+    document.getElementById('taskList').appendChild(li);
+    input.value = '';
+}
+</script>
+
+</body>
+</html>
